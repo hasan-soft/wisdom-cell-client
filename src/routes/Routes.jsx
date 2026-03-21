@@ -23,50 +23,54 @@ import ManageLessons from '../pages/Dashboard/Admin/ManageLessons/ManageLessons'
 import UpdateLesson from '../pages/Dashboard/User/UpdateLesson/UpdateLesson'
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile'
 import AdminRoute from './AdminRoute'
+import AboutPage from "../pages/About/AboutPage";
+import ContactPage from "../pages/Contact/ContactPage";
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: '/public-lessons',
-        element:<PublicLessons />
+        path: "/public-lessons",
+        element: <PublicLessons />,
+      },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      {
+        path: "/lesson-details/:id",
+        element: <LessonDetails></LessonDetails>,
       },
       {
-        path: '/lesson-details/:id',
-        element: <LessonDetails></LessonDetails>
+        path: "/author-profile/:authorEmail",
+        element: <AuthorProfile></AuthorProfile>,
       },
       {
-        path:"/author-profile/:authorEmail",
-        element: <AuthorProfile></AuthorProfile>
+        path: "/payment",
+        element: <Payment></Payment>,
       },
       {
-        path:"/payment",
-        element: <Payment></Payment>
+        path: "/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
-        path:"/payment-success",
-        element: <PaymentSuccess></PaymentSuccess>
+        path: "/payment-cancel",
+        element: <PaymentCancel></PaymentCancel>,
       },
       {
-        path:"/payment-cancel",
-        element: <PaymentCancel></PaymentCancel>
-      },
-      {
-        path:"/update-profile",
-        element: <UpdateProfile></UpdateProfile>
+        path: "/update-profile",
+        element: <UpdateProfile></UpdateProfile>,
       },
     ],
   },
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <SignUp /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <SignUp /> },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: (
       <PrivateRoute>
         <DashboardLayout />
@@ -74,7 +78,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <PrivateRoute>
             <DashboardHome></DashboardHome>
@@ -82,7 +86,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'add-lesson',
+        path: "add-lesson",
         element: (
           <PrivateRoute>
             <AddLesson></AddLesson>
@@ -90,7 +94,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'my-lessons',
+        path: "my-lessons",
         element: (
           <PrivateRoute>
             <MyLesson></MyLesson>
@@ -98,7 +102,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'my-favorites',
+        path: "my-favorites",
         element: (
           <PrivateRoute>
             <MyFavorites></MyFavorites>
@@ -107,7 +111,7 @@ export const router = createBrowserRouter([
       },
       // admin routes
       {
-        path: 'manage-users',
+        path: "manage-users",
         element: (
           <PrivateRoute>
             <AdminRoute>
@@ -117,7 +121,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'manage-lessons',
+        path: "manage-lessons",
         element: (
           <PrivateRoute>
             <AdminRoute>
@@ -127,24 +131,23 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'reported-lessons',
+        path: "reported-lessons",
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ReportedLessons/>
+              <ReportedLessons />
             </AdminRoute>
           </PrivateRoute>
         ),
       },
       {
-        path: 'profile',
+        path: "profile",
         element: (
           <PrivateRoute>
             <Profile />
           </PrivateRoute>
         ),
       },
-      
     ],
   },
-])
+]);

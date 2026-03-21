@@ -1,21 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Broken+Fax&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, dark;
 }
 
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #5d26c1;
-  --color-secondary: #9a6;
+
+  /* ── Brand ── */
+  --color-primary:          #4F46E5;
+  --color-primary-content:  #FFFFFF;
+  --color-secondary:        #F59E0B;
+  --color-secondary-content:#FFFFFF;
+
+  /* ── Base surfaces ── */
+  --color-base-100:         #F9FAFB;
+  --color-base-200:         #FFFFFF;
+  --color-base-300:         #E5E7EB;
+  --color-base-content:     #111827;
+
+  /* ── Semantic ── */
+  --color-success:          #10B981;
+  --color-success-content:  #FFFFFF;
+  --color-error:            #EF4444;
+  --color-error-content:    #FFFFFF;
 }
 
-body {
-  font-family: "Nunito", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+@plugin "daisyui/theme" {
+  name: "dark";
 
+  /* ── Brand ── */
+  --color-primary:          #6366F1;
+  --color-primary-content:  #FFFFFF;
+  --color-secondary:        #FBBF24;
+  --color-secondary-content:#0F172A;
+
+  /* ── Base surfaces ── */
+  --color-base-100:         #0F172A;
+  --color-base-200:         #1E293B;
+  --color-base-300:         #334155;
+  --color-base-content:     #F1F5F9;
+
+  /* ── Semantic ── */
+  --color-success:          #34D399;
+  --color-success-content:  #0F172A;
+  --color-error:            #F87171;
+  --color-error-content:    #0F172A;
+}
+
+@layer base {
+  body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: var(--color-base-100);
+    color: var(--color-base-content);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-muted {
+    color: #6B7280;
+  }
+  .dark .text-muted {
+    color: #94A3B8;
+  }
 }

@@ -1,66 +1,188 @@
-import React from 'react';
-import logo from '../../../assets/logo.png'
-import { Link } from 'react-router';
+import { Link } from "react-router";
+import logo from "../../../assets/logo.png";
+import { FaTwitter, FaFacebook, FaYoutube } from "react-icons/fa";
+
 const Footer = () => {
-    return (
-        <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
-            
-            <Link to={'/'} className='gap-2 items-center italic'>
-                <img src={logo} alt="" className='w-15' />
-                <span className={'text-primary font-bold font-[Rubik_Broken_Fax] text-2xl'}>Wisdom<span className='text-green-700'>Cell</span> </span>
+  return (
+    <div className="bg-base-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 pb-10 border-b border-base-300">
+          <div className="col-span-2 lg:col-span-1">
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <img
+                src={logo}
+                alt="WisdomCell"
+                className="h-16 md:h-20 w-auto"
+              />
             </Link>
-            <nav>
-                <h6 className="footer-title">Legal</h6>
-                <a className="link link-hover">Terms of use</a>
-                <a className="link link-hover">Privacy policy</a>
-                <a className="link link-hover">Cookie policy</a>
-            </nav>
-            <nav>
-                <h6 className="footer-title">Company</h6>
-                <a className="link link-hover">About us</a>
-                <a className="link link-hover">Contact</a>
-                <a className="link link-hover">Jobs</a>
-            </nav>
-            <nav>
-                <h6 className="footer-title">Social</h6>
-                <div className="grid grid-flow-col gap-4">
-                    <a href='https://x.com/'>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-                        </svg>
-                    </a>
-                    <a href='https://www.youtube.com/'>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                        </svg>
-                    </a>
-                    <a href='https://www.facebook.com/'>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-                        </svg>
-                    </a>
-                </div>
-            </nav>
-        </footer>
-    );
+            <p className="text-sm text-muted leading-relaxed mb-5 max-w-xs">
+              Capture life's most valuable lessons. Organize, reflect, and share
+              wisdom that shapes who you become.
+            </p>
+            <div className="flex gap-2">
+              <a
+                href="https://x.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-lg border border-base-300 flex items-center justify-center text-muted hover:text-primary hover:border-primary transition"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-lg border border-base-300 flex items-center justify-center text-muted hover:text-primary hover:border-primary transition"
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-lg border border-base-300 flex items-center justify-center text-muted hover:text-primary hover:border-primary transition"
+              >
+                <FaYoutube />
+              </a>
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">
+              Explore
+            </p>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/public-lessons"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Public Lessons
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Featured
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Most Saved
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Top Contributors
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-span-1">
+            <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">
+              Account
+            </p>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/signup"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Sign Up
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/login"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/payment"
+                  className="text-sm text-muted hover:text-primary transition flex items-center gap-2"
+                >
+                  Upgrade
+                  <span className="text-xs bg-secondary/20 text-secondary px-2 py-0.5 rounded font-medium">
+                    Premium
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-span-1">
+            <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">
+              Company
+            </p>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/about"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  About us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Terms of use
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="text-sm text-muted hover:text-primary transition"
+                >
+                  Privacy policy
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-6">
+          <p className="text-sm text-muted text-center sm:text-left">
+            © 2026 WisdomCell. All rights reserved.
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-success inline-block"></span>
+            <p className="text-sm text-muted">All systems operational</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Footer;

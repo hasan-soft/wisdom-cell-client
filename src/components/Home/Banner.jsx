@@ -4,99 +4,111 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link } from "react-router";
-import banner1 from '../../assets/banner1.jpg'
-import banner2 from '../../assets/banner2.jpg'
-import banner3 from '../../assets/banner3.jpg'
+import banner1 from "../../assets/banner1.jpg";
+import banner2 from "../../assets/banner2.jpg";
+import banner3 from "../../assets/banner3.jpg";
+
+const swiperStyles = `
+  .banner-swiper .swiper-pagination-bullet {
+    background-color: var(--color-base-300);
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    transition: background-color 0.3s, width 0.3s;
+  }
+  .banner-swiper .swiper-pagination-bullet-active {
+    background-color: var(--color-primary);
+    width: 24px;
+    border-radius: 4px;
+  }
+  .banner-swiper .swiper-pagination {
+    bottom: 16px;
+  }
+`;
+
+const slides = [
+  {
+    title: "Organize Lessons by How They Made You Feel",
+    description:
+      "Tag lessons as Motivational, Reflective, Sad, Gratitude, or Realization. Find exactly what you need based on emotional resonance.",
+    buttonText: "Share your thoughts",
+    buttonLink: "/add-lesson",
+    image: banner1,
+    alt: "Emotional organization illustration",
+  },
+  {
+    title: "Capture Insights Anytime, Anywhere",
+    description:
+      "Mobile-optimized for those sudden moments of clarity. Add lessons from your commute, travels, or quiet moments.",
+    buttonText: "Explore WisdomVault",
+    buttonLink: "/",
+    image: banner2,
+    alt: "Mobile capture illustration",
+  },
+  {
+    title: "Join 10,000+ Members Preserving Their Wisdom",
+    description:
+      "Real stories from our community. See how documenting lessons leads to personal breakthroughs.",
+    buttonText: "Join Us",
+    buttonLink: "/join",
+    image: banner3,
+    alt: "Community members illustration",
+  },
+];
 
 const Banner = () => {
-    return (
-        <div className="w-11/12 mx-auto px-10 pb-10 rounded-lg ">
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                spaceBetween={20}
-                slidesPerView={1}
-                navigation={false}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 4000, disableOnInteraction: false }}
-                loop={true}
-                breakpoints={{
-                    320: { slidesPerView: 1 },
-                    640: { slidesPerView: 1 },
-                    1024: { slidesPerView: 1 },
-                }}
-            >
+  return (
+    <>
+      <style>{swiperStyles}</style>
 
-                <SwiperSlide>
-                    <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-blue-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
-
-                        <div className="md:order-1 order-2 p-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold mb-3 leading-tight">Organize Lessons by How They Made You Feel</h2>
-                            <p className="text-xl mb-6">Tag lessons as Motivational, Reflective, Sad, Gratitude, or Realization. Find exactly what you need based on emotional resonance.</p>
-
-                            <Link to='/add-lesson' className="btn bg-secondary hover:bg-teal-600 text-white border-0 px-8">Share your thoughts</Link>
-                        </div>
-
-                        <div className="md:order-2 order-1 flex justify-center items-center">
-                            <img
-                                src={banner1}
-                                alt='Global Sourcing'
-                                className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500"
-                            />
-                        </div>
-
+      <section className="bg-base-100 py-8 md:py-10 lg:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            navigation={false}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            loop={true}
+            className="rounded-2xl shadow-xl banner-swiper"
+          >
+            {slides.map((slide, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-base-200 rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center p-6 md:p-10 lg:p-12 gap-8 lg:gap-12 min-h-[420px] sm:min-h-[480px] lg:min-h-[520px]">
+                  {/* Text */}
+                  <div className="order-2 lg:order-1 space-y-4 lg:space-y-6 text-center lg:text-left">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-base-content">
+                      {slide.title}
+                    </h2>
+                    <p className="text-base sm:text-lg text-muted leading-relaxed max-w-xl mx-auto lg:mx-0">
+                      {slide.description}
+                    </p>
+                    <div className="pt-2">
+                      <Link
+                        to={slide.buttonLink}
+                        className="btn btn-primary btn-lg px-8 sm:px-10 shadow-md hover:shadow-lg transition-shadow"
+                      >
+                        {slide.buttonText}
+                      </Link>
                     </div>
+                  </div>
 
-                </SwiperSlide>
-                {/* 2nd slide */}
-                <SwiperSlide>
-
-                    <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-green-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
-
-                        <div className="md:order-1 order-2 p-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold mb-3 leading-tight">Capture Insights Anytime, Anywhere</h2>
-                            <p className="text-xl  mb-6">Mobile-optimized for those sudden moments of clarity. Add lessons from your commute, travels, or quiet moments.</p>
-
-                            <Link to='/' className="btn bg-secondary hover:bg-teal-600 text-white border-0 px-8">Explore WisdomVault</Link>
-                        </div>
-
-                        <div className="md:order-2 order-1 flex justify-center items-center">
-                            <img
-                                src={banner2}
-                                alt='Manage Your Exports'
-                                className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500 "
-                            />
-                        </div>
-
-                    </div>
-
-                </SwiperSlide>
-                {/* 3rd slide */}
-                <SwiperSlide>
-
-                    <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-purple-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
-
-                        <div className="md:order-1 order-2 p-4">
-                            <h2 className="text-2xl lg:text-3xl font-bold  mb-3 leading-tight">Join 10,000+ Members Preserving Their Wisdom</h2>
-                            <p className="text-xl mb-6">Real stories from our community. See how documenting lessons leads to personal breakthroughs.</p>
-
-                            <Link to='/auth/login' className="btn bg-secondary hover:bg-teal-600 text-white border-0 px-8">Join Us</Link>
-                        </div>
-
-                        <div className="md:order-2 order-1 flex justify-center items-center">
-                            <img
-                                src={banner3}
-                                alt='Secure Trade'
-                                className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500 "
-                            />
-                        </div>
-                    </div>
-                </SwiperSlide>
-            </Swiper>
+                  <div className="order-1 lg:order-2 flex justify-center items-center">
+                    <img
+                      src={slide.image}
+                      alt={slide.alt}
+                      className="w-full max-w-[420px] lg:max-w-[500px] h-[220px] sm:h-[280px] lg:h-[340px] object-cover rounded-xl shadow-xl transform transition duration-500 hover:scale-[1.02]"
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-    );
+      </section>
+    </>
+  );
 };
 
 export default Banner;

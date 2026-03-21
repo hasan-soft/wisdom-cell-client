@@ -9,7 +9,6 @@ const ReportedLessons = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedLesson, setSelectedLesson] = useState(null);
 
-  // Fetch all reported lessons
   const { data: reports = [], refetch } = useQuery({
     queryKey: ["reported-lessons"],
     queryFn: async () => {
@@ -18,7 +17,6 @@ const ReportedLessons = () => {
     },
   });
 
-  // Delete lesson
   const handleDelete = async (lessonId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -34,7 +32,6 @@ const ReportedLessons = () => {
     });
   };
 
-  // Ignore report
   const handleIgnore = async (lessonId) => {
     await axiosSecure.patch(`/reports/ignore/${lessonId}`);
     Swal.fire("Ignored", "This report is now removed", "success");
@@ -55,18 +52,14 @@ const ReportedLessons = () => {
               <th>Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {reports.map((item, index) => (
               <tr key={item.lessonId}>
                 <td>{index + 1}</td>
                 <td>{item.lessonTitle}</td>
                 <td>
-                  <span className="badge badge-error text-white">
-                    {item.totalReports}
-                  </span>
+                  <span className="badge badge-error">{item.totalReports}</span>
                 </td>
-
                 <td className="flex gap-3">
                   <button
                     className="btn btn-sm btn-info text-white"
@@ -74,14 +67,12 @@ const ReportedLessons = () => {
                   >
                     <FaEye /> View
                   </button>
-
                   <button
                     className="btn btn-sm btn-error"
                     onClick={() => handleDelete(item.lessonId)}
                   >
                     <FaTrash /> Delete Lesson
                   </button>
-
                   <button
                     className="btn btn-sm btn-success"
                     onClick={() => handleIgnore(item.lessonId)}

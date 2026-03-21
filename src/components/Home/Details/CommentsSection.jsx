@@ -8,7 +8,7 @@ import LoadingSpinner from "../../Shared/LoadingSpinner";
 const CommentsSection = ({ lessonId }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  // React Hook Form
+
   const {
     register,
     handleSubmit,
@@ -16,16 +16,14 @@ const CommentsSection = ({ lessonId }) => {
     formState: { errors },
   } = useForm();
 
-  // get commnents
-  const { data: comments = [],refetch } = useQuery({
-    queryKey: ['comments', lessonId],
+  const { data: comments = [], refetch } = useQuery({
+    queryKey: ["comments", lessonId],
     queryFn: async () => {
-      const result = await axiosSecure.get(`/comments/${lessonId}`)
+      const result = await axiosSecure.get(`/comments/${lessonId}`);
       return result.data;
-    }
-  })
-  console.log(comments)
-  // Submit handler
+    },
+  });
+
   const onSubmit = async (data) => {
     if (!user) {
       Swal.fire("Login Required", "Please log in to comment", "info");
@@ -36,8 +34,8 @@ const CommentsSection = ({ lessonId }) => {
         commentText: data?.comment,
         userEmail: user?.email,
         lessonId: lessonId,
-        created_at: new Date()
-      }
+        created_at: new Date(),
+      };
 
       const res = await axiosSecure.post(`/comments`, commentData);
 
@@ -52,21 +50,17 @@ const CommentsSection = ({ lessonId }) => {
         refetch();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-
 
     reset();
   };
 
-  // // loading
-  // if (isLoading) return <LoadingSpinner />
   return (
     <section className="pt-6">
       <h3 className="text-lg font-bold mb-3">Comments</h3>
 
-      {/* show comment */}
+      {/* Show comments */}
       <div className="space-y-3 mb-4">
         {comments.map((c) => (
           <div key={c._id} className="bg-base-200 p-3 rounded-lg text-sm">
@@ -76,7 +70,7 @@ const CommentsSection = ({ lessonId }) => {
         ))}
       </div>
 
-      {/*  add comment*/}
+      {/* Add comment */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2">
         <div className="flex-1">
           <input
@@ -92,16 +86,11 @@ const CommentsSection = ({ lessonId }) => {
             })}
           />
           {errors.comment && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.comment.message}
-            </p>
+            <p className="text-error text-xs mt-1">{errors.comment.message}</p>
           )}
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-        >
+        <button type="submit" className="btn btn-primary">
           Post
         </button>
       </form>

@@ -10,7 +10,7 @@ const LessonAuthorCard = ({ lesson }) => {
 
       <div>
         <h4 className="font-bold">{lesson?.authorName}</h4>
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-muted">
           {lesson.authorLessonCount} lessons shared
         </p>
         <Link to={`/author-profile/${lesson?.authorEmail}`} className="btn btn-sm btn-info mt-2">

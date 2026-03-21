@@ -16,34 +16,32 @@ const LessonDetails = () => {
   const { userData } = useRole();
   const navigate = useNavigate();
 
-  // id
-  const {id}=useParams();
-  console.log(id)
+  const { id } = useParams();
 
-  // get lesson data
-  const {data: lesson={}, isLoading, refetch}=useQuery({
-    queryKey: ['lesson',id],
-    queryFn:async()=>{
-      const result=await axios.get(`${import.meta.env.VITE_API_URL}/lesson-details/${id}`)
+  const {
+    data: lesson = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["lesson", id],
+    queryFn: async () => {
+      const result = await axios.get(
+        `${import.meta.env.VITE_API_URL}/lesson-details/${id}`,
+      );
       return result.data;
-    }
-  })
-  if(!lesson){
-    return <NotFound/>
-  }
-  
-  // loading
-  if(isLoading) return <LoadingSpinner/>
+    },
+  });
 
-  const isLocked =
-    lesson.accessLevel === "premium" && !userData?.isPremium;
+  if (!lesson) return <NotFound />;
+  if (isLoading) return <LoadingSpinner />;
+
+  const isLocked = lesson.accessLevel === "premium" && !userData?.isPremium;
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4 space-y-10">
-
-      {/* Premium  Check */}
+      {/* Premium Check */}
       {isLocked && (
-        <div className="bg-warning text-center text-white p-4 rounded-lg shadow-md">
+        <div className="bg-warning text-warning-content text-center p-4 rounded-lg shadow-md">
           <p className="text-lg font-semibold">🔒 Premium Lesson</p>
           <p className="mb-2">Upgrade to unlock full lesson details.</p>
           <button
@@ -55,25 +53,12 @@ const LessonDetails = () => {
         </div>
       )}
 
-      {/* Main Lesson Content */}
       <LessonContent lesson={lesson} isLocked={isLocked} />
-
-      {/* Metadata Section */}
       {!isLocked && <LessonMetadata lesson={lesson} />}
-
-      {/* Author Information */}
       {!isLocked && <LessonAuthorCard lesson={lesson} />}
-      
-      {/* State Information */}
-      {!isLocked && <LessonStats lesson={lesson}/>}
-
-      {/* Like / Save / Share / Report */}
+      {!isLocked && <LessonStats lesson={lesson} />}
       {!isLocked && <LessonInteractions lesson={lesson} refetch={refetch} />}
-
-      {/* Comment section */}
       {!isLocked && <CommentsSection lessonId={lesson._id} />}
-
-      {/* Similar Recommended Lessons */}
       <SimilarLessonsSection lesson={lesson} />
     </div>
   );

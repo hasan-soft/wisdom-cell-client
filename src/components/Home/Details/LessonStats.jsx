@@ -1,11 +1,10 @@
 import { FaHeart, FaBookmark, FaEye } from "react-icons/fa";
-// static view
+
 const viewsCount = Math.floor(Math.random() * 10000);
 
-const LessonStats = ({lesson}) => {
-
+const LessonStats = ({ lesson }) => {
   return (
-    <div className="flex items-center gap-6 text-gray-700 mt-6">
+    <div className="flex items-center gap-6 text-base-content mt-6">
       {/* Likes */}
       <div className="flex items-center gap-2">
         <FaHeart className="text-red-500" />
@@ -15,9 +14,7 @@ const LessonStats = ({lesson}) => {
       {/* Favorites */}
       <div className="flex items-center gap-2">
         <FaBookmark className="text-blue-500" />
-        <span className="font-medium">
-          {lesson?.favoritesCount} Favorites
-        </span>
+        <span className="font-medium">{lesson?.favoritesCount} Favorites</span>
       </div>
 
       {/* Views */}

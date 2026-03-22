@@ -17,6 +17,8 @@ import {
   FiHome,
   FiPhone,
   FiInfo,
+  FiSun,
+  FiMoon,
 } from "react-icons/fi";
 
 const navLinkClass = ({ isActive }) =>
@@ -32,6 +34,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  //  Dark mode state
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  //  Apply theme on change
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -83,7 +98,6 @@ const Navbar = () => {
   return (
     <div className="bg-base-100/80 backdrop-blur-md border-b border-base-300 sticky top-0 z-40">
       <Container>
-        {/* Main Navbar Row */}
         <div className="grid grid-cols-[auto_1fr_auto] items-center h-20">
           {/* Left — Logo */}
           <Link
@@ -97,14 +111,25 @@ const Navbar = () => {
           <nav className="hidden lg:flex items-center justify-center gap-6">
             {desktopNavLinks}
           </nav>
-          {/* Mobile center placeholder */}
           <div className="lg:hidden" />
 
-          {/* Right — Auth + Mobile Toggle */}
+          {/* Right — Auth + Theme + Mobile Toggle */}
           <div className="flex items-center gap-2 justify-self-end">
+            {/*  Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-ghost btn-sm btn-circle"
+              title={theme === "light" ? "Switch to Dark" : "Switch to Light"}
+            >
+              {theme === "light" ? (
+                <FiMoon className="text-lg text-base-content/70" />
+              ) : (
+                <FiSun className="text-lg text-warning" />
+              )}
+            </button>
+
             {user ? (
               <div className="relative" ref={dropdownRef}>
-                {/* Avatar Button */}
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full border border-base-300 hover:border-primary hover:shadow-md transition-all bg-base-200"
@@ -130,10 +155,8 @@ const Navbar = () => {
                   />
                 </button>
 
-                {/* Dropdown */}
                 {isOpen && (
                   <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-base-200 shadow-2xl border border-base-300 overflow-hidden z-50">
-                    {/* User Info */}
                     <div className="px-4 py-4 bg-linear-to-r from-primary/10 to-secondary/10 border-b border-base-300">
                       <div className="flex items-center gap-3">
                         <img
@@ -157,7 +180,6 @@ const Navbar = () => {
                       </div>
                     </div>
 
-                    {/* Menu Items */}
                     <div className="py-1">
                       <Link
                         to="/dashboard/profile"
@@ -189,7 +211,6 @@ const Navbar = () => {
                         <FiBookOpen className="text-secondary shrink-0" /> My
                         Lessons
                       </Link>
-
                       {!userData?.isPremium && (
                         <Link
                           to="/payment"
@@ -199,7 +220,6 @@ const Navbar = () => {
                           <FiStar className="shrink-0" /> Upgrade to Premium
                         </Link>
                       )}
-
                       <button
                         onClick={() => {
                           logOut();
@@ -313,7 +333,22 @@ const Navbar = () => {
                 </NavLink>
               )}
 
-              {/* Login/Signup for mobile logged out */}
+              {/*  Theme toggle in mobile menu */}
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-base-content hover:bg-base-200 transition"
+              >
+                {theme === "light" ? (
+                  <>
+                    <FiMoon className="shrink-0" /> Dark Mode
+                  </>
+                ) : (
+                  <>
+                    <FiSun className="shrink-0 text-warning" /> Light Mode
+                  </>
+                )}
+              </button>
+
               {!user && (
                 <div className="flex gap-2 px-4 pt-3 border-t border-base-300 mt-1">
                   <Link

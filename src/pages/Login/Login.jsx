@@ -136,7 +136,7 @@ const Login = () => {
             </button>
           </div>
 
-          <button type="submit" className="btn btn-secondary w-full">
+          <button type="submit" className="btn btn-primary w-full">
             {loading ? (
               <TbFidgetSpinner className="animate-spin m-auto" />
             ) : (

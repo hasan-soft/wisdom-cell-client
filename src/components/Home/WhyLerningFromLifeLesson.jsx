@@ -73,7 +73,7 @@ const WhyLerningFromLifeLesson = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Link to={"/add-lesson"} className="btn btn-secondary px-8">
+          <Link to={"/add-lesson"} className="btn btn-primary px-8">
             Start Documenting Your Wisdom
           </Link>
         </div>
